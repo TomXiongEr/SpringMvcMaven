@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+  			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       		http://www.springframework.org/schema/context
+       		http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="true">
+	
+	
+	<!-- <mvc:default-servlet-handler/>
+	
+   启动SpringMVC的注解功能，它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例
+ 	<mvc:annotation-driven />
+  	<context:component-scan base-package="com.xm.springmvc" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	静态资源跳过
+	<mvc:resources location="/assets/**" mapping="/assets/"/>
+	<mvc:view-controller path="/" view-name="index" />
+	
+	对模型视图名称的解析，在请求时模型视图名称添加前后缀  
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+		  <property name="prefix" value="/" />
+	      <property name="suffix" value=".jsp" />
+      </bean>
+      
+</beans> -->
+
+
+<!-- 启动SpringMVC的注解功能，它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
+ 	<mvc:annotation-driven />
+  	<context:component-scan base-package="com.xm.springmvc" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	
+	<!-- 通过mvc:resources设置静态资源，这样servlet就会处理这些静态资源，而不通过控制器
+	设置不过滤内容，比如:css,jquery,img 等资源文件 -->
+	<!-- mapping：映射
+    location：本地资源路径，注意必须是webapp根目录下的路径。
+       两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/） -->
+    <!-- <resources mapping="/resources/**" location="/resources/" />
+    <resources mapping="/images/**" location="/images/" />
+    <resources mapping="/js/**" location="/js/" /> -->
+
+	
+	<!-- 设置所有访问style目录下面资源的，都到webapp的style路径中去找 -->
+	<mvc:resources location="/style/" mapping="/style/**"/>
+	
+	<!-- 将静态文件指定到某个特殊的文件夹中统一处理 -->
+	
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->  
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+		  <property name="prefix" value="/WEB-INF/jsp/" />
+	      <property name="suffix" value=".jsp" />
+	      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>	      
+      </bean>
+      
+  <!--     JNDI数据源  begin
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		 <property name = "jndiName" value = "laocheng" /> 
+	</bean> -->
+</beans>

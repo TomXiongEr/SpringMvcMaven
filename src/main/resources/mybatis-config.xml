@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  
+  <settings>		
+    <setting name="defaultExecutorType" value="REUSE" />
+  </settings>
+ 
+  <typeAliases>
+  	 <typeAlias type="com.xm.springmvc.domain.User" alias="User" />
+  	 
+  	 <typeAlias type="com.xm.springmvc.domain.Blog" alias="Blog" />
+  	 
+  </typeAliases>
+  
+
+ <!-- 由于spring-mybatis已经配置了mapper的映射，所以此处不需要再次配置了 -->
+ <!-- 
+ <mappers>
+    <mapper resource="mapper/StudentMapper.xml"/>
+ </mappers>   
+-->
+</configuration>
