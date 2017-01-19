@@ -9,5 +9,7 @@
     <import resource="classpath*:spring-source.xml"/>
     <!-- mybatis -->
 	<import resource="classpath*:spring-mybatis.xml"/>
+	<!-- redis配置 -->
+	<import resource="classpath*:redis.xml"/>
 	
 </beans>

@@ -1,4 +1,4 @@
-package com.xm.springmvc.Controller;
+package com.xm.springmvc.controller;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
