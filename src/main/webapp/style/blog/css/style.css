@@ -8389,3 +8389,31 @@ body.md-skin {
     margin: 0;
   }
 }
+
+/*2017-2-8增加p文字块的字数限制*/
+.textLimit {
+    position:relative;
+    line-height:1.4em;
+    /* 3 times the line-height to show 3 lines */
+    height:4.2em;
+    overflow:hidden;
+}
+.textLimit::after {
+    content:".....";
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 20px 1px 45px;
+    background:url(http://css88.b0.upaiyun.com/css88/2014/09/ellipsis_bg.png) repeat-y;
+}
+
+/* .textLimit {
+    width: 200px;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; * 对象作为伸缩盒子模型显示 *
+    -webkit-box-orient: vertical; * 设置或检索伸缩盒对象的子元素的排列方式 *
+    -webkit-line-clamp: 3; * 显示的行数 *
+    overflow: hidden;  * 隐藏超出的内容 *
+} */

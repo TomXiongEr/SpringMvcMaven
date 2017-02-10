@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.springmvc.blog.dao.IUserDao">
+    <!--通过userId获取用户名 -->
+	<select id="getUserNameById" parameterType="String" resultType="String">
+		select userName from laocheng_user  where userId =#{userId}
+	</select>
+	
+	<!-- 通过用户名获取User对象 -->
+	<select id="getUserByName" parameterType="User" resultType="User">
+		select * from  laocheng_user  where userName =#{userName}
+	</select>
+	
+	<!-- 通过用户名、密码获取User对象 -->
+	<select id="getUserByNameAndPsw" parameterType="User" resultType="User">
+		select * from  laocheng_user  where userName =#{userName} and password=#{password}
+	</select>
+	
+	<!-- 用户新账号注册 -->
+	<insert id="register" parameterType="User">
+	  insert into laocheng_user(userId,userName,password,nickName,email) values(#{userId},#{userName},#{password},#{nickName},#{email})
+	</insert>
+	
+	<select id="getAllUser" parameterType="User" resultType="User">
+	  select *  from  laocheng_user
+	</select>
+</mapper>

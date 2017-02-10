@@ -8,7 +8,16 @@
 	<!-- 引入配置文件 -->  
     <bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="location" value="classpath:/jdbc.properties" />  
+        <!-- <property name="location" value="classpath:/jdbc.properties" />  
+        <property name="location" value="classpath:/redis.properties" /> -->
+        <property name="locations">
+			<list>
+				<!-- 这里支持多种寻址方式：classpath和file -->
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
+				<!-- 推荐使用file的方式引入，这样可以将配置和代码分离 -->
+			</list>
+		</property>
     </bean>  
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  

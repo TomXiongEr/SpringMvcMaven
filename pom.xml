@@ -9,8 +9,13 @@
 	<description />
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- spring版本 -->
 		<spring.version>4.2.0.RELEASE</spring.version>
+		<!-- 分页插件版本 -->
+        <mybatis.paginator.version>4.2.0</mybatis.paginator.version>
 	</properties>
+
+    
 
 	<dependencies>
 		<dependency>
@@ -210,6 +215,14 @@
 			<version>2.7.3</version>
 		</dependency>
 		<!-- redis cache related.....end -->
+		
+		<!-- 分页插件 start -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${mybatis.paginator.version}</version>
+			</dependency>
+		<!-- end -->
 	</dependencies>
 	<build>
 		<plugins>

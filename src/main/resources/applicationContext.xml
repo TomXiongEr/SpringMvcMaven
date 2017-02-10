@@ -20,29 +20,6 @@
 	
     <!-- 自动扫描包，可以写多个 -->
     <context:component-scan base-package="com.minstone.outernetWeb.com" ></context:component-scan>
-   
-	 <bean id="dataSource"  
-                    class="org.logicalcobwebs.proxool.ProxoolDataSource">  
-            <property name="driver">  
-                    <value>com.mysql.jdbc.Driver</value>  
-            </property>  
-            <property name="driverUrl">  
-                      
-                   <value>jdbc:mysql://127.0.0.1:3306/laocheng?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true</value>
-            </property>            
-             <!--<property name="user" value="test_base"/> 
-             <property name="user" value="local_base"/>  -->
-              <property name="user" value="root"/>
-            <property name="password" value="123456"/>
-
-            <property name="alias" value="proxool.test"/>  
-            <property name="maximumActiveTime" value="300000"/>  
-            <property name="prototypeCount" value="0"/>  
-            <property name="maximumConnectionCount" value="50"/>  
-            <property name="minimumConnectionCount" value="2"/>  
-            <property name="simultaneousBuildThrottle" value="50"/>  
-            <property name="houseKeepingTestSql" value="select CURRENT_DATE"/>  
-    </bean>  
 	
 	<bean id="sqlSessionFactory" name="sqlSessionFactory"
 				class="org.mybatis.spring.SqlSessionFactoryBean">

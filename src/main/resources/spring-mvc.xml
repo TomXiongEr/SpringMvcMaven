@@ -56,6 +56,11 @@
 	<!-- 设置所有访问style目录下面资源的，都到webapp的style路径中去找 -->
 	<mvc:resources location="/style/" mapping="/style/**"/>
 	
+	<!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+	
+	<mvc:resources location="/" mapping="/**"/>
+	
 	<!-- 将静态文件指定到某个特殊的文件夹中统一处理 -->
 	
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->  

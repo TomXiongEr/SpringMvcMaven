@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.springmvc.blog.dao.IBlogDao">
+
+
+    <resultMap type="Blog" id="BlogMap">
+		<result property="id" column="ID" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="image" column="IMAGE" />
+		<result property="time" column="TIME" />	
+		<result property="editer" column="EDITER" />	
+		<result property="count" column="COUNT" />	
+		<result property="count1" column="COUNT1" />	
+		<result property="type" column="TYPE" />		
+		<result property="notice" column="NOTICE" />
+		<result property="keywords" column="KEYWORDS" />
+	</resultMap>
+	
+	<select id="getBlogList"  resultMap="BlogMap" resultType="java.util.HashMap">
+		select * from laocheng_article
+	</select>
+	
+</mapper>

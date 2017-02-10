@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"  %>
-
+<% request.setAttribute("root", request.getContextPath());%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -11,11 +11,11 @@
 	<meta http-equiv="keywords" content="登陆">
 	<meta http-equiv="description" content="登陆界面">
 	<!doctype html>
-	<script src="../style/js/modernizr.custom.63321.js"></script>
-	<script src="../style/js/jquery-1.6.4.min.js"></script>
-	<script src="../style/js/layer.js"></script>
-	<link rel="stylesheet" type="text/css" href="../style/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="../style/css/layer.css" />
+	<script src="${root}/style/js/modernizr.custom.63321.js"></script>
+	<script src="${root}/style/js/jquery-1.6.4.min.js"></script>
+	<script src="${root}/style/js/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="${root}/style/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/style/css/layer.css" />
   </head>
   <body>
         <div class="container">	
