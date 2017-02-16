@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>登陆</title>    
+    <title>注册</title>    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -32,9 +32,8 @@
                 </span>
             </div>	
             <header>
-				<h1>Custom <strong>Login Form</strong> Styling</h1>
-				<h2>Creative and modern form design with CSS magic</h2>
-
+				<!-- <h1>Custom <strong>Login Form</strong> Styling</h1>-->
+                <h2>Welcome to this blog,and record all of your moments in your life</h2>
 				<div class="support-note">
 					<span class="note-ie">Sorry, only modern browsers.</span>
 				</div>
@@ -42,7 +41,7 @@
 			<section class="main">				
 				<form id="registerForm" name="registerForm" method="POST" class="form-4" >
 				
-				    <h1 align="center">Register</h1>
+				    <h1 align="center">注册</h1>
 				    <p>
 				        <label for="nickName">NickName</label>
 				        <input type="text" name="nickName" id="nickName" placeholder="请输入昵称"   required>
@@ -96,7 +95,7 @@ $(document).ready(function(){
 	});
 	
 	$("#login").click(function(){
-		window.location.href="<c:url value='/login/login2'/>";
+		window.location.href="<c:url value='/login/login'/>";
 	});
 	
 	

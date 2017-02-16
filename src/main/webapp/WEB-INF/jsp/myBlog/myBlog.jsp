@@ -20,97 +20,95 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Toastr style -->
     <link href="./style/blog/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
     <link href="./style/blog/css/animate.css" rel="stylesheet">
     <link href="./style/blog/css/style.css" rel="stylesheet">
   </head>
  <body>
 
-    <div id="wrapper">
+<div id="wrapper">
+     <!-- 侧边导航栏 -->
+     <jsp:include page="../base/left.jsp" />
 
-        <!-- 侧边导航栏 -->
-        <jsp:include page="../base/left.jsp" />
+     <div id="page-wrapper" class="gray-bg">
+     
+     <!-- 顶部导航栏 -->
+     <jsp:include page="../base/top.jsp" />
+      
+         <div class="row wrapper border-bottom white-bg page-heading">
+             <div class="col-lg-10">
+                 <h2>Blog</h2>
+                 <ol class="breadcrumb">
+                     <li>
+                         <a href="index.html">Home</a>
+                     </li>
+                     <li>
+                         <a>Miscellaneous</a>
+                     </li>
+                     <li class="active">
+                         <strong>Blog</strong>
+                     </li>
+                 </ol>
+             </div>
+             <div class="col-lg-2">
+             </div>
+         </div>
 
-        <div id="page-wrapper" class="gray-bg">
-        
-        <!-- 顶部导航栏 -->
-        <jsp:include page="../base/top.jsp" />
-         
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Blog</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a>Miscellaneous</a>
-                        </li>
-                        <li class="active">
-                            <strong>Blog</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-                </div>
+     <!-- 正文内容 -->
+     <div class="wrapper wrapper-content  animated fadeInRight blog">
+     <from action="" id="form" method="post">
+      <c:forEach items="${blogList}" var="blog" varStatus="varStatus">  
+         <div class="row">
+             <div class="col-lg-12">              
+                 <div class="ibox">
+                     <div class="ibox-content">
+                         <a href="blog/blogArticle" class="btn-link">
+                             <h2>
+                                 ${blog.title}
+                             </h2>
+                         </a>
+                         <div class="small m-b-xs">
+                             <strong>${blog.editer}</strong> 
+                             <span class="text-muted"><i class="fa fa-clock-o"></i> ${blog.time }</span>
+                         </div>
+                         <p class="textLimit">
+                             ${blog.content}
+                         </p>
+                         <div class="row">
+                             <div class="col-md-6">
+                                     <h5>Tags: ${blog.keywords }</h5>
+                                     <button class="btn btn-primary btn-xs" type="button">Model</button>
+                                     <button class="btn btn-white btn-xs" type="button">Publishing</button>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="small text-right">
+                                     <h5>Stats:</h5>
+                                     <div> <i class="fa fa-comments-o"> </i> 56 comments </div>
+                                     <i class="fa fa-eye"> </i> 144 views
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>         
+                       
+             </div>     
+         </div>
+      </c:forEach> 
+      </from>
+       <div class="footer">
+            <div class="pull-right">
+             10GB of <strong>250GB</strong> Free.
             </div>
-
-        <!-- 正文内容 -->
-        <div class="wrapper wrapper-content  animated fadeInRight blog">
-        <from action="" id="form" method="post">
-         <c:forEach items="${blogList}" var="blog" varStatus="varStatus">  
-            <div class="row">
-                <div class="col-lg-12">              
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <a href="blog/blogArticle" class="btn-link">
-                                <h2>
-                                    ${blog.title}
-                                </h2>
-                            </a>
-                            <div class="small m-b-xs">
-                                <strong>${blog.editer}</strong> 
-                                <span class="text-muted"><i class="fa fa-clock-o"></i> ${blog.time }</span>
-                            </div>
-                            <p class="textLimit">
-                                ${blog.content}
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                        <h5>Tags: ${blog.keywords }</h5>
-                                        <button class="btn btn-primary btn-xs" type="button">Model</button>
-                                        <button class="btn btn-white btn-xs" type="button">Publishing</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div> <i class="fa fa-comments-o"> </i> 56 comments </div>
-                                        <i class="fa fa-eye"> </i> 144 views
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>         
-                          
-                </div>     
+            <div>
+             <strong>Copyright</strong> Example Company &copy; 2014-2017
             </div>
-         </c:forEach> 
-         </from>
-          <div class="footer">
-               <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-               </div>
-               <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
-               </div>
-           </div>
-           
-           <!--分页 -->
-           <div align="center">
-               <ul class="pagination" id="paginator"></ul>
-           </div>
-
         </div>
+        
+        <!--分页 -->
+        <div align="center">
+            <ul class="pagination" id="paginator"></ul>
+        </div>
+
+     </div>
    </div>
      
     <!-- Mainly scripts -->
@@ -129,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var optionParams={
     		currentPage:${pageModel.pageNum},
     		totalPages:${pageModel.pages},
-    		requestUrl:"<c:url value='/blog/myBlog'/>?page="
+    		requestUrl:"<c:url value='/blog/myBlog'/>?pageNum="
     };
     var options = {
 		   bootstrapMajorVersion: 3, //bootstrap版本
@@ -162,16 +160,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   return "第" + page + "页";
 			   }
 		   },
-		   /* pageUrl: function(type, page, current){
+		   pageUrl: function(type, page, current){
 		       return optionParams.requestUrl+page; //跳转到选定页面
-		       //$("#form").action=optionParams.requestUrl+page;
-			   //$("#form").submit();
-		   }, */
-		   onPageClicked:function(event,originalEvent, type,page){
-			   alert(page);
+		   },
+		   /* onPageClicked:function(event,originalEvent, type,page){
 			   $("#form").action=optionParams.requestUrl+page;
 			   $("#form").submit();
-		   },
+		   }, */
 		   numberOfPages: 6, //显示“第几页”的选项数目
 		   currentPage:optionParams.currentPage<%--<%= pageNo %> --%>, //当前页数
 		   totalPages:optionParams.totalPages<%--<%= totalPages %>--%> //总页数

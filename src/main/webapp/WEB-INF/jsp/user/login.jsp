@@ -33,19 +33,16 @@
             </div>
 			
 			<header>
-			
-				<h1>Custom <strong>Login Form</strong> Styling</h1>
-				<h2>Creative and modern form design with CSS magic</h2>
-				
+				<!--<h1>Custom <strong>Login Form</strong> Styling</h1>-->
+				<h2>Welcome to this blog,and record all of your moments in your life</h2>
 				<div class="support-note">
 					<span class="note-ie">Sorry, only modern browsers.</span>
 				</div>
-				
 			</header>
 			
 			<section class="main">					
 				<form id="loginForm" name="loginForm" method="POST" class="form-4" >
-				    <h1 align="center">Login</h1>							
+				    <h1 align="center">登录</h1>							
 				    <p>
 				        <label for="login">Username or email</label>
 				        <input type="text" name="userName" placeholder="请输入用户名"   required>

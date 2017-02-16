@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xm.springmvc.blog.service.BlogService;
+import com.xm.springmvc.blog.service.UserService;
 import com.xm.springmvc.common.model.PageModel;
 
 /**
@@ -34,6 +35,9 @@ public class BlogController {
 	
 	@Autowired
 	BlogService blogService;
+	@Autowired 
+	UserService userService;
+	int i=0;
 	
 	/**
 	 *@Function:
@@ -64,7 +68,7 @@ public class BlogController {
 		List<Map> blogList=new ArrayList<Map>();
 		Map map=new HashMap();
 		try{
-			blogList=this.blogService.getBlogList(pageModel);
+			 blogList=this.blogService.getBlogList(pageModel);
 		}catch(Exception e){
 			logger.error("获取博客数据出错!",e);
 		}

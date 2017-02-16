@@ -17,8 +17,8 @@
 		<result property="keywords" column="KEYWORDS" />
 	</resultMap>
 	
-	<select id="getBlogList"  resultMap="BlogMap" resultType="java.util.HashMap">
-		select * from laocheng_article
+	<select id="getBlogList"  resultType="java.util.HashMap">
+		select * from blog
 	</select>
 	
 </mapper>
