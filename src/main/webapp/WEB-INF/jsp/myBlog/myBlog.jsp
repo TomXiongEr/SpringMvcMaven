@@ -125,8 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type='text/javascript'>
     //bootstrap分页;
     var optionParams={
-    		currentPage:${pageModel.pageNum},
-    		totalPages:${pageModel.pages},
+    		currentPage:${pageBean.pageNum},
+    		totalPages:${pageBean.pages},
     		requestUrl:"<c:url value='/blog/myBlog'/>?pageNum="
     };
     var options = {

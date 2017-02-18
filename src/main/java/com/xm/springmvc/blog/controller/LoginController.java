@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.xm.springmvc.blog.domain.User;
 import com.xm.springmvc.blog.service.UserService;
 import com.xm.springmvc.common.utils.ModelAndViewUtil;
+import com.xm.springmvc.common.utils.StringUtils;
 
 
 /**
@@ -32,7 +34,7 @@ import com.xm.springmvc.common.utils.ModelAndViewUtil;
  * @date:2016年11月2日 下午11:48:27
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/")
 public class LoginController {
 	
 	@Autowired
@@ -49,10 +51,15 @@ public class LoginController {
 	 *@Return ModelAndView
 	 */
 	@RequestMapping("/login")
-	public ModelAndView  login(){
+	public ModelAndView  login(HttpServletRequest request){
 		    ModelAndView resultModel=new ModelAndView();
 			try{
-			  resultModel = ModelAndViewUtil.getModelAndViewUtil("/user/login" );
+				System.err.println(request.getSession().getAttribute("userCode"));
+			  if(StringUtils.isNotBlank(request.getSession().getAttribute("userCode"))){
+				  resultModel=ModelAndViewUtil.getModelAndViewUtil("/user/userIndex");
+			  }else{
+				  resultModel = ModelAndViewUtil.getModelAndViewUtil("/user/login" );
+			  }
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -66,7 +73,7 @@ public class LoginController {
 	 *@Params:
 	 *@Return String
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked"})
 	@ResponseBody
 	@RequestMapping(value="/loginCheck",method=RequestMethod.POST)
 	public String loginCheck(@ModelAttribute("user") User user,HttpServletRequest request){
@@ -122,10 +129,16 @@ public class LoginController {
 	 *@Params:
 	 *@Return ModelAndView
 	 */
-	@RequestMapping("/userIndexView")	
+	@RequestMapping("/userIndex")	
     public ModelAndView userIndexView(){		
 		return new ModelAndView("/user/userIndex");
 	}
+	
+	@RequestMapping("/toIndex")
+	public ModelAndView toIndex(){
+		return new ModelAndView(new RedirectView("/userIndex.do"));
+	}
+
 	
 	@RequestMapping("/getAllUser")	
 	@ResponseBody

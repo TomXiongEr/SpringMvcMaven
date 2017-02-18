@@ -104,7 +104,7 @@ $("#login").bind ("click",function(){
 		type:"post",
 		data:params,
 		dataType:"json",
-		url:"<c:url value='/login/loginCheck'/>",
+		url:"<c:url value='/loginCheck'/>",
 		success:function(data){
 			
 			if(data.check=="username_not_found"){
@@ -117,7 +117,7 @@ $("#login").bind ("click",function(){
 			    alert("验证码输入错误!");	
 			    $("input[name='verifyCode']").val("");
 			}else{
-				window.location.href="<c:url value='/login/userIndexView'/>";
+				window.location.href="<c:url value='/userIndex'/>";
 			}		
 /* 			window.location.reload();
  */		},
@@ -140,7 +140,7 @@ function volidate(){
 }
 
 $("#register").click(function(){
-	window.location.href="<c:url value='/login/registerView'/>";
+	window.location.href="<c:url value='/registerView'/>"
 });
 
 });

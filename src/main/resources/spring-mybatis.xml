@@ -39,7 +39,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
    	
-    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
+    <!-- (事务管理)transaction manager-->  
     <bean id="transactionManager"  
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <property name="dataSource" ref="dataSource" />  
@@ -48,7 +48,7 @@
     <!-- 配置springmvc事务注解 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     
-    <!-- 启用切面技术 -->  
+    <!-- 启用切面技术 -->
     <aop:aspectj-autoproxy/>
     <!-- 配置切入点 --> 
     <aop:config proxy-target-class="true">  

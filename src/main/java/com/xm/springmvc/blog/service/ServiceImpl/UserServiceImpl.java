@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 	    IUserDao userDao;
 		
 	   
+		@Override
 		public String getUserNameById(String userId){
 			String str=""; 
 			try{
@@ -46,6 +47,7 @@ public class UserServiceImpl implements UserService {
 		 * @function:用户登陆验证
 		 * @returnType:boolean
 		 */
+		@Override
 		@SuppressWarnings("rawtypes")
 		public Map loginCheck(User user,HttpServletRequest request) throws Exception{
 			Map<String,String> resultMap=new HashMap<String,String>();
@@ -60,6 +62,10 @@ public class UserServiceImpl implements UserService {
 							resultMap.put("check","password_is_wrong");
 						}else{
 							resultMap.put("check","login_success");
+							//登录成功的时候将用户的信息存入session中;
+							HttpSession session = request.getSession(true);  
+							//存入Session
+							session.setAttribute("userCode",object.getUserName());  
 						}
 					}
 				}else{
@@ -95,6 +101,7 @@ public class UserServiceImpl implements UserService {
 		 * @function:用户账号注册
 		 * @returnType:map
 		 */
+		@Override
 		@SuppressWarnings({ "unused", "rawtypes" })
 		public Map register(User user,HttpServletRequest request) 
 				throws Exception{

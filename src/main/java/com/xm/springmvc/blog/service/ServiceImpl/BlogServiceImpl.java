@@ -6,36 +6,30 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.github.pagehelper.PageHelper;
 import com.xm.springmvc.blog.dao.IBlogDao;
 import com.xm.springmvc.blog.service.BlogService;
 import com.xm.springmvc.common.model.PageBean;
 import com.xm.springmvc.common.model.PageModel;
 
 @Service
-@Transactional
 public class BlogServiceImpl implements BlogService {
 
 	@Autowired
 	IBlogDao blogDao;
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	@Override
-	public List<Map> getBlogList(PageModel pageModel){
+	public PageBean<Map> getBlogList(PageModel pageModel){
 		List<Map> list=new ArrayList<Map>();
-		PageBean<Map> pageBean;
+		PageBean pageBean = null;
 		try{
 			pageModel.initPageHelper();
-			PageHelper.startPage(pageModel.getPageNum(),pageModel.getPageSize());
 			list=this.blogDao.getBlogList();
+			pageBean=new PageBean<Map>(list);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		pageModel.setPageNum(new PageBean<Map>(list).getPageNum());
-		pageModel.setPageSize(new PageBean<Map>(list).getPageNum());
-		pageModel.setPages(new PageBean<Map>(list).getPages());
-		return (new PageBean<Map>(list)).getList();
+		return pageBean;
 	}
 }

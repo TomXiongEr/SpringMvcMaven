@@ -83,7 +83,7 @@ $(document).ready(function(){
 			type:"post",
 			data:$("#registerForm").serialize(),
 			dataType:"json",
-			url:"<c:url value='/login/register'/>",
+			url:"<c:url value='register'/>",
 			success:function(data){
 			    alert(data.msg);				
 				window.location.reload();
@@ -95,7 +95,7 @@ $(document).ready(function(){
 	});
 	
 	$("#login").click(function(){
-		window.location.href="<c:url value='/login/login'/>";
+		window.location.href="<c:url value='/login'/>";
 	});
 	
 	

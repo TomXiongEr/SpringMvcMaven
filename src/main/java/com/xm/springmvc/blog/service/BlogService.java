@@ -1,8 +1,8 @@
 package com.xm.springmvc.blog.service;
 
-import java.util.List;
 import java.util.Map;
 
+import com.xm.springmvc.common.model.PageBean;
 import com.xm.springmvc.common.model.PageModel;
 
 
@@ -15,6 +15,7 @@ public interface BlogService {
 	 *@Params:
 	 *@Return List<Map>
 	 */
-	public List<Map> getBlogList(PageModel pageModel);
+	public PageBean<Map> getBlogList(PageModel pageModel);
+
 
 }

@@ -37,14 +37,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>    
                 <li>
                     <!-- <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a> -->
-                    <a href="<%=basePath%>/blog/myBlog"><i class="fa fa-diamond"></i> <span class="nav-label">我的博客</span></a>
+                    <a href="<%=basePath%>blog/myBlog"><i class="fa fa-diamond"></i> <span class="nav-label">我的博客</span></a>
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">我的相册</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li class="active"><a href="<%=basePath%>/gallery/myGallery">相册</a></li>    
-                        <li ><a href="<%=basePath%>/gallery/myGallery">相册</a></li>
-                        <li ><a href="<%=basePath%>/gallery/myGallery">相册</a></li>                 
+                        <li class="active"><a href="<%=basePath%>gallery/myGallery">相册</a></li>    
+                        <li ><a href="<%=basePath%>gallery/myGallery">相册</a></li>
+                        <li ><a href="<%=basePath%>gallery/myGallery">相册</a></li>                 
                     </ul>
                 </li>
                 
