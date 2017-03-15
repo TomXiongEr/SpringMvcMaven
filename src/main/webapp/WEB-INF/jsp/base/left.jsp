@@ -36,8 +36,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </li>    
                 <li>
-                    <!-- <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a> -->
-                    <a href="<%=basePath%>blog/myBlog"><i class="fa fa-diamond"></i> <span class="nav-label">我的博客</span></a>
+                    <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">我的博客</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="active"><a href="<%=basePath%>blog/myBlog">我的博客</a></li>    
+                        <li ><a href="<%=basePath%>gallery/myGallery">发表博客</a></li>      
+                    </ul>
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">我的相册</span><span class="fa arrow"></span></a>
@@ -48,8 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </ul>
                 </li>
                 
-                
-                 <li>
+                <li>
                     <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Gallery</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="<%=basePath%>html/basic_gallery.html">Lightbox Gallery</a></li>
@@ -58,7 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </ul>
                 </li>
-                
                 
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>

@@ -47,7 +47,54 @@
 		<!-- <url-pattern>*.do</url-pattern> -->
 	</servlet-mapping>
 
+    <!-- durid拦截器,访问监控界面 -->
+    <servlet>  
+        <servlet-name>DruidStatView</servlet-name>  
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class> 
+		<!-- 配置允许以及禁止访问IP;deny优先于 allow-->
+		<!-- <init-param>
+		  <param-name>allow</param-name>
+		  <param-value>128.242.127.1/24,128.242.128.1</param-value>
+		</init-param> 
+		<init-param>
+		  <param-name>deny</param-name>
+		  <param-value>128.242.127.4</param-value>
+		</init-param>  -->
+    </servlet>  
+    <servlet-mapping>  
+        <servlet-name>DruidStatView</servlet-name>  
+        <url-pattern>/druid/*</url-pattern>  
+    </servlet-mapping>
 
+    <!--WebStatFilter用于采集web-jdbc关联监控的数据-->
+    <filter>
+	    <filter-name>DruidWebStatFilter</filter-name>
+	    <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+	    <init-param>
+	        <param-name>exclusions</param-name>
+	        <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+	    </init-param>
+	    <!-- session统计 -->
+	    <!-- <init-param>
+            <param-name>sessionStatMaxCount</param-name> 
+            <param-value>1000</param-value>
+        </init-param>-->
+         <!--是否开启session统计-->
+        <!-- <init-param>
+            <param-name>sessionStatEnable</param-name> 
+            <param-value>false</param-value>
+        </init-param> -->
+        <!-- 配置profileEnable能够监控单个url调用的sql列表 -->
+        <!-- <init-param>
+            <param-name>profileEnable</param-name> 
+           <param-value>true</param-value>
+        </init-param> -->
+	</filter>
+	<filter-mapping>
+	    <filter-name>DruidWebStatFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- 字符集过滤器  -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -69,40 +116,64 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!--shiro过滤器验证;在此处要将所有请求拦截到shiro的验证机制中;不加的话,shiro中的权限机制不起作用;-->
+	<filter>
+          <filter-name>shiroFilter</filter-name>
+          <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+          <init-param>
+              <param-name>targetfilterlifecycle</param-name>
+              <param-value>true</param-value>
+          </init-param>
+     </filter>
+     <filter-mapping>
+         <filter-name>shiroFilter</filter-name>
+         <url-pattern>/*</url-pattern>
+     </filter-mapping>
 
 	<!--容器的安全验证;设置被保护的资源 -->
-	<security-constraint>
+	<!-- <security-constraint>
 		<display-name>everyone</display-name>
 		<web-resource-collection>
 			<web-resource-name>AdminPage</web-resource-name>
-			<!-- /protect目录下的所有资源是受保护的 -->
-			<!-- <url-pattern>/protect/*</url-pattern> -->
-			<!--设置toIndex受保护,当页面请求时，就执行<login-config>的处理方案-->
-			<url-pattern>/toIndex</url-pattern>
+			/protect目录下的所有资源是受保护的
+			<url-pattern>/protect/*</url-pattern>
+			设置toIndex受保护,当页面请求时，就执行<login-config>的处理方案
+			<url-pattern>/toIndex.do</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
 		<auth-constraint>
-			<!-- 这里的member要与tomcat-user.xml中配置的role一致 -->
+			这里的member要与tomcat-user.xml中配置的role一致
 			<role-name>*</role-name>
 		</auth-constraint>
 		<user-data-constraint>
 			<transport-guarantee>NONE</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	<!-- 设置登录页面及登录失败页面;指定当WEB客户访问受保护的WEB资源时，系统弹出的登录对话框的类型-->
+	设置登录页面及登录失败页面;指定当WEB客户访问受保护的WEB资源时，系统弹出的登录对话框的类型
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>default</realm-name>
 		<form-login-config>
 			<form-login-page>/login.do</form-login-page>
-			<!--<form-error-page>/FishTest/LoginError.html</form-error-page> -->
+			<form-error-page>/FishTest/LoginError.html</form-error-page>
 		</form-login-config>
 	</login-config>
 
 	<security-role>
 		<role-name>everyone</role-name>
-	</security-role>
+	</security-role> -->
+
+	<error-page>  
+	     <error-code>404</error-code>  
+	    <location>/404.jsp</location>  
+	</error-page>  
+	  
+	<error-page>  
+	    <error-code>500</error-code>  
+	    <location>/jsp/base/500.jsp</location>  
+	</error-page>
 
 	<session-config>
 		<session-timeout>1800</session-timeout>

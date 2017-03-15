@@ -37,6 +37,7 @@
 
 <!-- 启动SpringMVC的注解功能，它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
  	<mvc:annotation-driven />
+ 	
   	<context:component-scan base-package="com.xm.springmvc" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -69,9 +70,5 @@
 	      <property name="suffix" value=".jsp" />
 	      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>	      
       </bean>
-      
-  <!--     JNDI数据源  begin
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		 <property name = "jndiName" value = "laocheng" /> 
-	</bean> -->
+
 </beans>

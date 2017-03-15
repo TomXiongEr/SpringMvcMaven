@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.xm.springmvc.blog.domain.Permission;
+import com.xm.springmvc.blog.domain.Role;
 import com.xm.springmvc.blog.domain.User;
 
 @Repository
@@ -45,5 +47,37 @@ public interface IUserDao {
 	 */
 	public void register(User user);
 	
-	public List<User> getAllUser();
+	
+	/**
+	 *@Function:通过用户名获取用户;
+	 * @author TOM XIONG
+	 * @date 2017年2月27日 下午10:23:40
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public User getUserByUserName(String userName) throws Exception;
+
+	
+	/**
+	 * 通过用户名获取该用户的所有的角色;
+	 * @author TOM XIONG
+	 * @date 2017年2月27日 下午11:08:46
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Role> getRolesByUserName(String userName) throws Exception;
+	
+	/**
+	 * 根据用户名获取用户的角色权限;
+	 * @author TOM XIONG
+	 * @date 2017年2月28日 上午9:23:36
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Permission> getPermissionsByUserName(String userName) throws Exception;
+	
+	public List<User> getAllUser(String param);
 }

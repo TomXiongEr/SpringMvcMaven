@@ -21,7 +21,29 @@
 	  insert into user(userId,userName,password,nickName,email) values(#{userId},#{userName},#{password},#{nickName},#{email})
 	</insert>
 	
-	<select id="getAllUser" parameterType="User" resultType="User">
-	  select *  from  user
+	<select id="getUserByUserName" parameterType="java.lang.String" resultType="User" >
+	  select  *  from  user where userName=#{userName}#
+	</select>
+	
+	<!-- 根据用户名获取用户的权限-->
+	<select id="getRolesByUserName" parameterType="java.lang.String" resultType="Role" >
+	  select *  from role where id in (
+	   select roleId 
+	     from  user 
+	     where userName=#{userName}#
+	)
+	</select>
+	
+	<!--根据用户名查出用户的权限 -->
+	<select id="getPermissionsByUserName" parameterType="java.lang.String" resultType="Permission">
+	   select *  from permission where roleId in 
+	   (select roleId 
+		  from  user 
+		  where userName=#{userName}#
+	   )
+	</select>
+	
+	<select id="getAllUser" parameterType="java.lang.String" resultType="User">
+	  select *  from  user where userName=#{name}#
 	</select>
 </mapper>

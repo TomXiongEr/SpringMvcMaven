@@ -1,6 +1,8 @@
 package com.xm.springmvc.common.cache;
 
+
 import java.lang.reflect.Method;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 以Spring与配置文件来管理的redis缓存配置类
+ * @author liuyazhuang
  *
  */
 @Configuration

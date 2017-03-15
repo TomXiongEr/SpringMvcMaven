@@ -27,10 +27,12 @@ public class BlogController {
 	private static final Logger logger = Logger.getLogger(BlogController.class);
 	
 	@Autowired
-	BlogService blogService;
+	private BlogService blogService;
+	
 	@Autowired 
-	UserService userService;
-	PageModel pageModel;
+	private UserService userService;
+	
+	private PageModel pageModel;
 	
 	/**
 	 *@Function:

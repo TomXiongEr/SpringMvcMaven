@@ -56,6 +56,8 @@ http://mybatis.org/dtd/mybatis-3-config.dtd 中指定的顺序：
   <typeAliases>
   	 <typeAlias type="com.xm.springmvc.blog.domain.User" alias="User" />
   	 <typeAlias type="com.xm.springmvc.blog.domain.Blog" alias="Blog" />
+  	 <typeAlias type="com.xm.springmvc.blog.domain.Role" alias="Role" />
+  	 <typeAlias type="com.xm.springmvc.blog.domain.Permission" alias="Permission" />
   </typeAliases>
   
   <plugins>

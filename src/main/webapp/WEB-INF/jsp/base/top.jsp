@@ -124,7 +124,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </ul>
                 </li>
                 <li>
-                    <a href="login.html">
+                    <!-- <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a> -->
+                    <a href="<c:url value='/logout'/>">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>

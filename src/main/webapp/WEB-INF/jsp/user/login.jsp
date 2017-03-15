@@ -54,7 +54,7 @@
 				    <p>
 				      <div style="text-align: left; margin-left: 10px;" id="vcode" >
 	                     <input type="text" name="verifyCode" id="verifyCode"  placeholder="验证码" style="width: 110px; margin-left: -8px; margin-right: 8px;">
-                	     <img src="<c:url value='/open/getGifCode'/>" id="vcodeImg" alt="验证码" title="点击更换"  />
+                	     <img src="#" id="vcodeImg" alt="验证码" title="点击更换"  />
                       </div>                      
                     </p>
 				    <p>	   				        
@@ -65,14 +65,37 @@
 			          <div style="float:left;width:45%;"><input type="button" name="login"  id="login" value="登陆" ></div>
 			          <div style="float:right;width:45%;"><input type="button" name="register" id="register" value="注册"></div>
 			        </div>				           
-				</form>​
+				</form>
+				<!-- <form action="/login2.do" method="post">
+				<div style="margin-bottom: 20px">
+					<div>用户名：</div>
+					<input class="easyui-textbox" name="username" data-options="required:true,iconCls:'icon-man'" style="width: 100%; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px">
+					<div>密码:</div>
+					<input class="easyui-textbox" type="password" name="password" data-options="required:true,iconCls:'icon-lock'" style="width: 100%; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px">
+					<div>是否记住我:<input type="checkbox" name="rememberMe"></div>
+				</div>
+				<div style="margin-bottom: 20px">
+					<a href="#" id="btn-login" class="easyui-linkbutton c8" iconCls="icon-ok" style="width: 100%; height: 32px">Login</a>
+				</div>
+			</form> -->​
 			</section>
         </div>
   </body>
 </html>
 <script>
+
+/* $(function() {
+	$('#btn-login').click(function() {
+		$('form').submit();
+	});
+
+}) */
+
 $(document).ready(function(){
-	
 //回车事件绑定
 document.onkeydown=function(event){
 	var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -80,47 +103,47 @@ document.onkeydown=function(event){
 		$('#login').click();
 	}
 }; 
+//键盘绑定事件;
+$('#userName,#password,#verifyCode').bind('keydown',function(event){
+	if(event.keyCode == 13){
+		if(flag){
+			$("#login").click();
+		}
+	}
+});
 
 //验证码
  $("#vcodeImg").click(function(){  
 	/* 动态验证码，改变地址，多次在火狐浏览器下，不会变化的BUG，故这样解决 */
-	var i = new Image();
-	i.src ="<c:url value='/open/getGifCode'/>?"  + Math.random();
-	i.id="vcodeImg";
-	$(i).replaceAll(this);
+	var img=document.getElementById("vcodeImg");
+	img.src ="<c:url value='/open/getGifCode'/>?time"  +new Date();
+	//$(i).replaceAll(this);
 }); 
-
-/* function change(img){
-	img.src = "<c:url value='/open/getGifCode'/>?date="+new Date().getTime();
-} */
 
 $("#login").bind ("click",function(){
 	if(!volidate()){
 		return;
 	}
 	var params=$("#loginForm").serialize();
-	
 	$.ajax({
 		type:"post",
 		data:params,
 		dataType:"json",
 		url:"<c:url value='/loginCheck'/>",
 		success:function(data){
-			
-			if(data.check=="username_not_found"){
-				layer.msg("用户名输入有误!");
+			if(data.checkCode=="10"){
+				layer.msg("该用户不存在!");
 				$("input[name='userName']")[0].focus();
-			}else if(data.check=="password_is_wrong"){
-				layer.msg("密码输入有误!");
-				$("input[name='password']")[0].focus();
-			}else if(data.check=="vCode_is_wrong"){
+			}else if(data.checkCode=="11"){
 			    alert("验证码输入错误!");	
 			    $("input[name='verifyCode']").val("");
+			}else if(data.checkCode=="12"){
+			    alert("用户名或密码错误!");	
+			    $("input[name='userName']")[0].focus();
 			}else{
-				window.location.href="<c:url value='/userIndex'/>";
+				window.location.href="<c:url value='/userLogin'/>";
 			}		
-/* 			window.location.reload();
- */		},
+		},
 		error:function(){
 			alert("服务器内部异常!");
 		}
@@ -142,6 +165,9 @@ function volidate(){
 $("#register").click(function(){
 	window.location.href="<c:url value='/registerView'/>"
 });
+
+//初始化验证码;
+$("#vcodeImg").click();
 
 });
 </script>

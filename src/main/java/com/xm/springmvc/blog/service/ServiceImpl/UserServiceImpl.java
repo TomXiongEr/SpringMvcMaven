@@ -1,5 +1,6 @@
 package com.xm.springmvc.blog.service.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.xm.springmvc.blog.dao.IUserDao;
+import com.xm.springmvc.blog.domain.Permission;
+import com.xm.springmvc.blog.domain.Role;
 import com.xm.springmvc.blog.domain.User;
 import com.xm.springmvc.blog.service.UserService;
+import com.xm.springmvc.common.model.SysConstant;
 
 /**
  * @Title:UserServiceImpl 
@@ -27,8 +31,7 @@ import com.xm.springmvc.blog.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	    @Autowired
-	    IUserDao userDao;
-		
+	    private IUserDao userDao;
 	   
 		@Override
 		public String getUserNameById(String userId){
@@ -41,12 +44,6 @@ public class UserServiceImpl implements UserService {
 			return str;
 		}
 		
-		/**
-		 * @author TOM XIONG
-		 * @date:2016-10-31
-		 * @function:用户登陆验证
-		 * @returnType:boolean
-		 */
 		@Override
 		@SuppressWarnings("rawtypes")
 		public Map loginCheck(User user,HttpServletRequest request) throws Exception{
@@ -55,21 +52,10 @@ public class UserServiceImpl implements UserService {
 				if(verifyCode(request)){
 					User object=this.userDao.getUserByName(user);
 					if(object==null){
-						resultMap.put("check","username_not_found");
-					}else{
-						User userObject=this.userDao.getUserByNameAndPsw(user);
-						if(userObject==null){
-							resultMap.put("check","password_is_wrong");
-						}else{
-							resultMap.put("check","login_success");
-							//登录成功的时候将用户的信息存入session中;
-							HttpSession session = request.getSession(true);  
-							//存入Session
-							session.setAttribute("userCode",object.getUserName());  
-						}
+						resultMap.put("checkCode",SysConstant.USER_NOT_EXIST);
 					}
 				}else{
-					resultMap.put("check","vCode_is_wrong");
+					resultMap.put("checkCode",SysConstant.VERIFY_CODE_ERROR);
 				}			
 			}catch(Exception e){
 				e.printStackTrace();
@@ -78,13 +64,6 @@ public class UserServiceImpl implements UserService {
 			return resultMap;
 		}
 		
-		/**
-		 *@Function:判断验证码的正确性方法
-		 *@Author:TOM XIONG
-		 *@Date:2016年11月3日 下午9:21:24
-		 *@Params:
-		 *@Return boolean
-		 */
 		public boolean verifyCode(HttpServletRequest request){
 			HttpSession session = request.getSession(true);  
 			String vcode=session.getAttribute("_code").toString();//获取系统生成的验证码  
@@ -95,12 +74,6 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		
-		/**
-		 * @author TOM XIONG
-		 * @date:2016-10-31
-		 * @function:用户账号注册
-		 * @returnType:map
-		 */
 		@Override
 		@SuppressWarnings({ "unused", "rawtypes" })
 		public Map register(User user,HttpServletRequest request) 
@@ -126,14 +99,50 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		//for test
+		@Cacheable(value="getAllUser",keyGenerator="customKeyGenerator") 
 		@Override
-		@Cacheable("getAllUser")
 		public List<User> getAllUser(){
 			List<User> list=null;
-			list=this.userDao.getAllUser();
+			Map map=new HashMap();
+			String name="admin";
+			list=this.userDao.getAllUser(name);
 			System.err.print("调用查询!");
 			return list;
 		}
 
+		
+		@Override
+		public User getUserByUserName(String userName) throws Exception{
+			User user=null;
+			try{
+				user=this.userDao.getUserByUserName(userName); 
+			}catch(Exception e){
+				throw new Exception("通过用户名获取用户出错!");
+			}
+			return user;
+		}
+
+		@Override
+		public List<Role> getRolesByUserName(String userName) throws Exception{
+			List<Role> roleList=new ArrayList<Role>();
+			try{
+				roleList=this.userDao.getRolesByUserName(userName); 
+			}catch(Exception e){
+				throw new Exception("通过用户名获取用户出错!");
+			}
+			return roleList;
+		}
+
+		@Override
+		public List<Permission> getPermissionsByUserName(String userName) throws Exception{
+			List<Permission> permissionList=new ArrayList<Permission>();
+			try{
+				permissionList=this.userDao.getPermissionsByUserName(userName);
+			}catch(Exception e){
+				throw new Exception("通过用户名获取该用户的角色权限出错!"); 
+			}
+			return permissionList;
+		}
+		
 	}
 

@@ -1,16 +1,24 @@
 package com.xm.springmvc.blog.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,10 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.xm.springmvc.blog.domain.User;
 import com.xm.springmvc.blog.service.UserService;
+import com.xm.springmvc.common.model.SysConstant;
 import com.xm.springmvc.common.utils.ModelAndViewUtil;
 import com.xm.springmvc.common.utils.StringUtils;
 
@@ -38,8 +46,9 @@ import com.xm.springmvc.common.utils.StringUtils;
 public class LoginController {
 	
 	@Autowired
-	UserService userService;
-	User user=new User();
+	private UserService userService;
+	
+	private User user;
 	
 	private static final Logger logger = Logger.getLogger(LoginController.class);//日志文件
 	
@@ -65,6 +74,18 @@ public class LoginController {
 			}
 			return resultModel;
 	}
+	
+	
+	/**
+	 * 此方法为is_remembered的实现形式;反编译后的方法,可熟悉is_remembered为什么一直为false;
+	 * isRemembered的定义实现
+	 */
+	public boolean isRemembered() {
+        Subject subject = SecurityUtils.getSubject();
+		PrincipalCollection principals = subject.getPrincipals();
+		return (principals != null) && (!principals.isEmpty()) && (!subject.isAuthenticated());
+	}
+	
 
 	/**
 	 *@Function:登陆验证
@@ -78,14 +99,43 @@ public class LoginController {
 	@RequestMapping(value="/loginCheck",method=RequestMethod.POST)
 	public String loginCheck(@ModelAttribute("user") User user,HttpServletRequest request){
 		Map<String,String> resultMap=new HashMap<String,String>();
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword());
 		try{
 			resultMap=this.userService.loginCheck(user,request);
+			if(StringUtils.isBlank(resultMap.get("checkCode"))){
+				if(subject.isRemembered()==false){
+					token.setRememberMe(true);//设置登录时的rememberme起效;
+					subject.login(token);
+				}
+			}
 		}catch(Exception e){
+			resultMap.put("checkCode",SysConstant.PASSWORD_ERROR);
 			e.printStackTrace();   
 			logger.error("登陆验证失败!", e);
 		}
 		String returnValue=JSONObject.fromObject(resultMap).toString();
 		return returnValue;
+	}
+	
+	
+	/**
+	 * 用户验证通过后,实行跳转,跳转到拦截之前的url
+	 * @author TOM XIONG
+	 * @date 2017年3月2日 上午9:46:00
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/userLogin")
+	public void userLogin(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	   //shiro会将每一次因不满足权限而拦截的请求的url都会存入request的attributr中;
+	   SavedRequest savedRequest = WebUtils.getSavedRequest(request);//获取前一次请求的路径;
+	   if(savedRequest!=null && savedRequest.getRequestUrl()!=null){
+		   response.sendRedirect(savedRequest.getRequestUrl());//跳转至拦截前的URL
+	   }else{
+		   response.sendRedirect("userIndex");//重新访问userIndex,拦截至登录页;
+	   } 
 	}
 	
 	/**
@@ -97,9 +147,9 @@ public class LoginController {
 	 */
 	@RequestMapping("/registerView")
     public ModelAndView registerView(){
-		
 		return new ModelAndView("/user/register");
 	}
+	
 	
 	/**
 	 *@Function:用户注册页面
@@ -132,11 +182,6 @@ public class LoginController {
 	@RequestMapping("/userIndex")	
     public ModelAndView userIndexView(){		
 		return new ModelAndView("/user/userIndex");
-	}
-	
-	@RequestMapping("/toIndex")
-	public ModelAndView toIndex(){
-		return new ModelAndView(new RedirectView("/userIndex.do"));
 	}
 
 	
