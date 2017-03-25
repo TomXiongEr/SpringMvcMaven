@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.xm.springmvc.blog.dao.IUserDao;
 import com.xm.springmvc.blog.domain.Permission;
 import com.xm.springmvc.blog.domain.Role;
 import com.xm.springmvc.blog.domain.User;
 import com.xm.springmvc.blog.service.UserService;
+import com.xm.springmvc.common.cache.RedisClient;
 import com.xm.springmvc.common.model.SysConstant;
 
 /**
@@ -76,8 +77,7 @@ public class UserServiceImpl implements UserService {
 		
 		@Override
 		@SuppressWarnings({ "unused", "rawtypes" })
-		public Map register(User user,HttpServletRequest request) 
-				throws Exception{
+		public Map register(User user,HttpServletRequest request)  throws Exception{
 			Map<String,String> resultMap=new HashMap<String,String>();
 			String rePassword=request.getParameter("rePassword");
 			try{  
@@ -99,14 +99,20 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		//for test
-		@Cacheable(value="getAllUser",keyGenerator="customKeyGenerator") 
+		/*@Cacheable(value="getAllUser",keyGenerator="customKeyGenerator") */
 		@Override
-		public List<User> getAllUser(){
+		public List<User> getAllUser() throws Exception{
 			List<User> list=null;
 			Map map=new HashMap();
 			String name="admin";
-			list=this.userDao.getAllUser(name);
-			System.err.print("调用查询!");
+			if(RedisClient.get("list")!=null){
+				list=(List<User>)JSON.parse(RedisClient.get("list").toString());
+				System.err.print("list:"+RedisClient.get("list"));
+			}else{
+				list=this.userDao.getAllUser(name);
+				RedisClient.set("list",list);
+				System.err.print("调用查询!");
+			}			
 			return list;
 		}
 

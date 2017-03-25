@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"  %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -6,6 +7,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head> 
+    <base href="<%=basePath%>">
+    
     <title>404 Error</title>
     <meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -18,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="./style/blog/css/animate.css" rel="stylesheet">
     <link href="./style/blog/css/style.css" rel="stylesheet">
   </head>
-  <body>
+  
     <body class="gray-bg">
     <div class="middle-box text-center animated fadeInDown">
         <h1>404</h1>

@@ -82,7 +82,7 @@ $(document).ready(function(){
 			type:"post",
 			data:$("#registerForm").serialize(),
 			dataType:"json",
-			url:"<c:url value='register'/>",
+			url:"<c:url value='/user/register'/>",
 			success:function(data){
 			    alert(data.msg);				
 				window.location.reload();

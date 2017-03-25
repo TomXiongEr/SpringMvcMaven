@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">我的博客</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li class="active"><a href="<%=basePath%>blog/myBlog">我的博客</a></li>    
-                        <li ><a href="<%=basePath%>gallery/myGallery">发表博客</a></li>      
+                        <li ><a href="<%=basePath%>blog/toEditBlogPage">发表博客</a></li>      
                     </ul>
                 </li>
                 <li>

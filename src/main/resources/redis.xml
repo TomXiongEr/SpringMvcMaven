@@ -41,16 +41,31 @@
 		<property name="defaultExpiration" value="${redis.expiration}"/>
 	</bean>
 	
-	<!-- 配置RedisCacheConfig -->
+	<!-- 配置RedisCacheConfig;使用注解的形式操作redis; -->
 	<bean id="redisCacheConfig" class="com.xm.springmvc.common.cache.RedisCacheConfig">
 		<constructor-arg ref="jedisConnectionFactory" />
 		<constructor-arg ref="redisTemplate" />
 		<constructor-arg ref="redisCacheManager" />
 	</bean>
 
+    
    <!--  <bean id="redisUtil" class="com.xm.springmvc.common.cache.RedisUtil">
         <property name="redisTemplate" ref="redisTemplate"/>
     </bean> -->
+	
+	<!-- <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+		 <constructor-arg ref="poolConfig" />  
+         <constructor-arg index="1" value="${redis.host}"/>
+         <constructor-arg index="2" value="${redis.port}"/>
+         timeout
+         <constructor-arg index="3" value="${redis.timeout}"/>
+    </bean>  -->
+    
+	<!-- 使用redis连接池操作redis; -->
+	<bean id="redisClient" class="com.xm.springmvc.common.cache.RedisClient">
+	     <!-- <property name="jedisPool" ref="jedisPool"/> -->
+	     <constructor-arg ref="jedisConnectionFactory" />  
+    </bean>
 	
 	<!-- redis  config  end -->
 </beans>

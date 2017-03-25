@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xm.springmvc.blog.dao.IBlogDao;
+import com.xm.springmvc.blog.domain.Blog;
 import com.xm.springmvc.blog.service.BlogService;
 import com.xm.springmvc.common.model.PageBean;
 import com.xm.springmvc.common.model.PageModel;
@@ -16,9 +17,8 @@ import com.xm.springmvc.common.model.PageModel;
 public class BlogServiceImpl implements BlogService {
 
 	@Autowired
-	IBlogDao blogDao;
+	private IBlogDao blogDao;
 	
-	@SuppressWarnings({ "rawtypes"})
 	@Override
 	public PageBean<Map> getBlogList(PageModel pageModel){
 		List<Map> list=new ArrayList<Map>();
@@ -31,5 +31,25 @@ public class BlogServiceImpl implements BlogService {
 			e.printStackTrace();
 		}
 		return pageBean;
+	}
+	
+	@Override
+	public void saveBlogData(Blog blog){
+		try{
+			this.blogDao.saveBlogData(blog);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public Blog getBlogById(int id){
+		Blog blog=new Blog();
+		try{
+			blog=this.blogDao.getBlogById(id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return blog;
 	}
 }

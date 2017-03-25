@@ -88,13 +88,6 @@
 </html>
 <script>
 
-/* $(function() {
-	$('#btn-login').click(function() {
-		$('form').submit();
-	});
-
-}) */
-
 $(document).ready(function(){
 //回车事件绑定
 document.onkeydown=function(event){
@@ -129,7 +122,7 @@ $("#login").bind ("click",function(){
 		type:"post",
 		data:params,
 		dataType:"json",
-		url:"<c:url value='/loginCheck'/>",
+		url:"<c:url value='/user/loginCheck'/>",
 		success:function(data){
 			if(data.checkCode=="10"){
 				layer.msg("该用户不存在!");
@@ -141,7 +134,7 @@ $("#login").bind ("click",function(){
 			    alert("用户名或密码错误!");	
 			    $("input[name='userName']")[0].focus();
 			}else{
-				window.location.href="<c:url value='/userLogin'/>";
+				window.location.href="<c:url value='/user/userLogin'/>";
 			}		
 		},
 		error:function(){

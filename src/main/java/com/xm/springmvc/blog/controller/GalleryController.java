@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xm.springmvc.common.utils.ModelAndViewUtil;
+
 /**
  * @Title:GalleryController 
  * @Description: Copyrights belongs to xiongm      
@@ -29,7 +31,7 @@ public class GalleryController {
 	 */
 	@RequestMapping("/myGallery")
 	public ModelAndView  myGallery(){
-		return new ModelAndView("/myGallery/myGallery");
+		return ModelAndViewUtil.getModelAndViewUtil("/myGallery/myGallery");
 	}
 	
 }

@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="博文日志">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!--CSS文件-->
     <link href="./style/blog/css/bootstrap.min.css" rel="stylesheet">
     <link href="./style/blog/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -38,15 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <div class="col-lg-10">
                  <h2>Blog</h2>
                  <ol class="breadcrumb">
-                     <li>
-                         <a href="index.html">Home</a>
-                     </li>
-                     <li>
-                         <a>Miscellaneous</a>
-                     </li>
-                     <li class="active">
-                         <strong>Blog</strong>
-                     </li>
+                     <li><a href="index.html">Home</a></li>
+                     <li><a>Miscellaneous</a></li>
+                     <li class="active"><strong>Blog</strong></li>
                  </ol>
              </div>
              <div class="col-lg-2">
@@ -61,18 +56,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <div class="col-lg-12">              
                  <div class="ibox">
                      <div class="ibox-content">
-                         <a href="blog/blogArticle" class="btn-link">
-                             <h2>
-                                 ${blog.title}
-                             </h2>
+                         <a href="blog/articleDetail?id=${blog.id}" class="btn-link">
+                             <h2>${blog.title}</h2>
                          </a>
                          <div class="small m-b-xs">
                              <strong>${blog.editer}</strong> 
-                             <span class="text-muted"><i class="fa fa-clock-o"></i> ${blog.time }</span>
+                             <span class="text-muted"><i class="fa fa-clock-o"></i> ${blog.publishDate }</span>
                          </div>
-                         <p class="textLimit">
-                             ${blog.content}
-                         </p>
+                         <div class="textLimit" style="font-size:2px;">${blog.content}</div>
                          <div class="row">
                              <div class="col-md-6">
                                      <h5>Tags: ${blog.keywords }</h5>
@@ -94,19 +85,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </div>
       </c:forEach> 
       </from>
-       <div class="footer">
-            <div class="pull-right">
-             10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-             <strong>Copyright</strong> Example Company &copy; 2014-2017
-            </div>
-        </div>
+      
+      <!-- 页脚 -->
+      <jsp:include page="../base/footer.jsp" />
         
-        <!--分页 -->
-        <div align="center">
+      <!--分页 -->
+      <div align="center">
             <ul class="pagination" id="paginator"></ul>
-        </div>
+      </div>
 
      </div>
    </div>
@@ -171,7 +157,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   currentPage:optionParams.currentPage<%--<%= pageNo %> --%>, //当前页数
 		   totalPages:optionParams.totalPages<%--<%= totalPages %>--%> //总页数
 		   }
-    
 		   $('#paginator').bootstrapPaginator(options);
     </script>
 

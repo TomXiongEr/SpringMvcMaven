@@ -6,7 +6,7 @@
     <title>我的博客</title>
     <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 	<script language="javascript">	
-	window.location.href="/SpringMvcMaven/userIndex.action";
+	window.location.href="/SpringMvcMaven/index";
 	</script>
   </head>
 <body>

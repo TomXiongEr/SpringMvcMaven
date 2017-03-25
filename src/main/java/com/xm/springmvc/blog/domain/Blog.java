@@ -1,6 +1,7 @@
 package com.xm.springmvc.blog.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Blog implements Serializable{
 	
@@ -8,7 +9,7 @@ public class Blog implements Serializable{
 	private String title;
 	private String content;
 	private String image;
-	private String time;
+	private Date publishDate;
 	private String editer;
     private int count;
     private int count1;
@@ -42,13 +43,13 @@ public class Blog implements Serializable{
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
 
+	public Date getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
 	public String getEditer() {
 		return editer;
 	}
