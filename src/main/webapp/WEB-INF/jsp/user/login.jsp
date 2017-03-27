@@ -21,8 +21,8 @@
         <div class="container">	
 			<!-- Codrops top bar -->
             <div class="codrops-top">
-                <a href="http://tympanus.net/Tutorials/RealtimeGeolocationNode/">
-                    <strong>&laquo; Previous Demo: </strong>Real-Time Geolocation Service with Node.js
+                <a href="<c:url value='/index'/>">
+                    <p>&laquo;返回首页</p>
                 </a>
                 <span class="right">
                 	<a href="http://www.flickr.com/photos/12943476@N04/4017721337/in/photostream">Background by Robert Hamilton</a>
@@ -30,11 +30,9 @@
                         <strong>Back to the Codrops Article</strong>
                     </a>
                 </span>
-            </div>
-			
+            </div>   			
 			<header>
-				<!--<h1>Custom <strong>Login Form</strong> Styling</h1>-->
-				<h2>Welcome to this blog,and record all of your moments in your life</h2>
+				<p style="color: #fff;font-size:22px; line-height:1.6em;margin: 0;">Welcome to this blog,and record all of your moments in your life</p>
 				<div class="support-note">
 					<span class="note-ie">Sorry, only modern browsers.</span>
 				</div>
@@ -42,7 +40,7 @@
 			
 			<section class="main">					
 				<form id="loginForm" name="loginForm" method="POST" class="form-4" >
-				    <h1 align="center">登录</h1>							
+				    <h1 align="center">登 录</h1>							
 				    <p>
 				        <label for="login">Username or email</label>
 				        <input type="text" name="userName" placeholder="请输入用户名"   required>
@@ -65,23 +63,7 @@
 			          <div style="float:left;width:45%;"><input type="button" name="login"  id="login" value="登陆" ></div>
 			          <div style="float:right;width:45%;"><input type="button" name="register" id="register" value="注册"></div>
 			        </div>				           
-				</form>
-				<!-- <form action="/login2.do" method="post">
-				<div style="margin-bottom: 20px">
-					<div>用户名：</div>
-					<input class="easyui-textbox" name="username" data-options="required:true,iconCls:'icon-man'" style="width: 100%; height: 32px">
-				</div>
-				<div style="margin-bottom: 20px">
-					<div>密码:</div>
-					<input class="easyui-textbox" type="password" name="password" data-options="required:true,iconCls:'icon-lock'" style="width: 100%; height: 32px">
-				</div>
-				<div style="margin-bottom: 20px">
-					<div>是否记住我:<input type="checkbox" name="rememberMe"></div>
-				</div>
-				<div style="margin-bottom: 20px">
-					<a href="#" id="btn-login" class="easyui-linkbutton c8" iconCls="icon-ok" style="width: 100%; height: 32px">Login</a>
-				</div>
-			</form> -->​
+				</form>​
 			</section>
         </div>
   </body>
@@ -122,7 +104,7 @@ $("#login").bind ("click",function(){
 		type:"post",
 		data:params,
 		dataType:"json",
-		url:"<c:url value='/user/loginCheck'/>",
+		url:"<c:url value='/loginCheck'/>",
 		success:function(data){
 			if(data.checkCode=="10"){
 				layer.msg("该用户不存在!");
@@ -134,7 +116,7 @@ $("#login").bind ("click",function(){
 			    alert("用户名或密码错误!");	
 			    $("input[name='userName']")[0].focus();
 			}else{
-				window.location.href="<c:url value='/user/userLogin'/>";
+				window.location.href="<c:url value='/userLogin'/>";
 			}		
 		},
 		error:function(){

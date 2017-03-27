@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
-                                    <form action="<%=basePath%>blog/saveBlogData" id="editForm" method="post">
+                                    <form action="<%=basePath%>user/blog/saveBlogData" id="editForm" method="post">
                                         <fieldset class="form-horizontal">
                                             <div class="form-group"><label class="col-sm-2 control-label">标题:</label>
                                                 <div class="col-sm-10"><input type="text" name="title" id="title" class="form-control" placeholder="输入博客标题"></div>

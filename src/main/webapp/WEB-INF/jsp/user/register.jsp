@@ -33,7 +33,7 @@
             </div>	
             <header>
 				<!-- <h1>Custom <strong>Login Form</strong> Styling</h1>-->
-                <h2>Welcome to this blog,and record all of your moments in your life</h2>
+                <p style="color: #fff;font-size:22px; line-height:1.6em;margin: 0;">Welcome to this blog,and record all of your moments in your life</p>
 				<div class="support-note">
 					<span class="note-ie">Sorry, only modern browsers.</span>
 				</div>
@@ -41,7 +41,7 @@
 			<section class="main">				
 				<form id="registerForm" name="registerForm" method="POST" class="form-4" >
 				
-				    <h1 align="center">注册</h1>
+				    <h1 align="center">注 册</h1>
 				    <p>
 				        <label for="nickName">NickName</label>
 				        <input type="text" name="nickName" id="nickName" placeholder="请输入昵称"   required>

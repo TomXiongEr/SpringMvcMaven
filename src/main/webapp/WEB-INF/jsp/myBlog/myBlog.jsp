@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <div class="col-lg-12">              
                  <div class="ibox">
                      <div class="ibox-content">
-                         <a href="blog/articleDetail?id=${blog.id}" class="btn-link">
+                         <a href="<%=basePath%>user/blog/articleDetail?id=${blog.id}" class="btn-link">
                              <h2>${blog.title}</h2>
                          </a>
                          <div class="small m-b-xs">
@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var optionParams={
     		currentPage:${pageBean.pageNum},
     		totalPages:${pageBean.pages},
-    		requestUrl:"<c:url value='/blog/myBlog'/>?pageNum="
+    		requestUrl:"<c:url value='/user/blog/myBlog'/>?pageNum="
     };
     var options = {
 		   bootstrapMajorVersion: 3, //bootstrap版本

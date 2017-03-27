@@ -22,7 +22,7 @@ import com.xm.springmvc.common.utils.ModelAndViewUtil;
  */
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/user/blog")
 public class BlogController {
 
 	//日志文件
@@ -98,6 +98,6 @@ public class BlogController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "redirect:/blog/toEditBlogPage";
+		return "redirect:/user/blog/toEditBlogPage";
 	}
 }

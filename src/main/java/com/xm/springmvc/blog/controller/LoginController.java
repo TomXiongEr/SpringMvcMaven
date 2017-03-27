@@ -96,7 +96,7 @@ public class LoginController {
 	 */
 	@SuppressWarnings({ "unchecked"})
 	@ResponseBody
-	@RequestMapping(value="/user/loginCheck",method=RequestMethod.POST)
+	@RequestMapping(value="/loginCheck",method=RequestMethod.POST)
 	public String loginCheck(@ModelAttribute("user") User user,HttpServletRequest request){
 		Map<String,String> resultMap=new HashMap<String,String>();
         Subject subject = SecurityUtils.getSubject();
@@ -127,14 +127,14 @@ public class LoginController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/user/userLogin")
+	@RequestMapping(value="/userLogin")
 	public void userLogin(HttpServletRequest request,HttpServletResponse response) throws IOException{
 	   //shiro会将每一次因不满足权限而拦截的请求的url都会存入request的attributr中;
 	   SavedRequest savedRequest = WebUtils.getSavedRequest(request);//获取前一次请求的路径;
 	   if(savedRequest!=null && savedRequest.getRequestUrl()!=null){
 		   response.sendRedirect(savedRequest.getRequestUrl());//跳转至拦截前的URL
 	   }else{
-		   response.sendRedirect("userIndex");//重新访问userIndex,拦截至登录页;
+		   response.sendRedirect("user/index/userIndex");//重新访问userIndex,拦截至登录页;
 	   } 
 	}
 	
@@ -159,7 +159,7 @@ public class LoginController {
 	 *@Return String
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/user/register")
+	@RequestMapping("/register")
     public String register(User user,HttpServletRequest request){
 		Map<String,String> resultMap=new HashMap<String,String>();
 		try{
@@ -171,20 +171,7 @@ public class LoginController {
 		String returnValue=JSONObject.fromObject(resultMap).toString();
 		return returnValue;
 	}
-	
-	/**
-	 *@Function:进入首页
-	 *@Author:TOM XIONG
-	 *@Date:2016年11月3日 下午10:10:05
-	 *@Params:
-	 *@Return ModelAndView
-	 */
-	@RequestMapping("/user/userIndex")	
-    public ModelAndView userIndexView(){		
-		return ModelAndViewUtil.getModelAndViewUtil("/user/userIndex");
-	}
 
-	
 	@RequestMapping("/getAllUser")	
 	@ResponseBody
 	public String getAllUser() throws Exception{

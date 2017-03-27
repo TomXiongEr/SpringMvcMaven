@@ -9,17 +9,17 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
      
     <!-- 缓存管理器 使用Ehcache实现 -->	
-	<!-- <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
-    </bean> -->
+    </bean>
 	
 	<!-- 凭证匹配器 -->
-	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-        <!-- <constructor-arg ref="cacheManager"/> -->
+	<!-- <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
-    </bean>
+    </bean> -->
           
     <!-- shiro缓存配置 -->
     <!-- 会话ID生成器 -->
@@ -88,12 +88,11 @@
      <bean id="myRealm" class="com.xm.springmvc.common.realm.MyRealm">
        <property name="userService" ref="userService"/> 
        <!--可配置cache token<->认证信息的cache，用于REST等需要频繁认证的场景 -->
-       <!--<property name="authorizationCachingEnabled" value="true"/>-->
+       <property name="authorizationCachingEnabled" value="true"/>
        <!-- <property name="credentialsMatcher" ref="credentialsMatcher"/> -->
        <property name="cachingEnabled" value="true"/>
        <property name="authenticationCachingEnabled" value="true"/>
        <property name="authenticationCacheName" value="authenticationCache"/>
-       <property name="authorizationCachingEnabled" value="true"/>
        <property name="authorizationCacheName" value="authorizationCache"/>
      </bean>
 
@@ -101,7 +100,7 @@
      <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
         <property name="sessionManager" ref="sessionManager" />
-		<!-- <property name="cacheManager" ref="cacheManager" /> -->
+		<property name="cacheManager" ref="cacheManager" />
 		<property name="rememberMeManager" ref="rememberMeManager" />
      </bean>
    
@@ -144,7 +143,7 @@
                  <!--anon 表示匿名访问，不需要认证以及授权-->
                  <!-- /loginAdmin=anon -->
                  <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
-                 <!-- /userIndex*=authc -->
+                 /userIndex*=authc
                  /user/**=authc
                 <!-- /login2.do=authc -->
                  /logout*=logout

@@ -24,6 +24,14 @@ App-views：
 contacts: profiles  中的联系人,可以导入联系人，记录联系人的信息;
 
 
+目录分层:
+baseController:负责处理基本的类方法;用于继承
+BlogController:负责博客内容模块;
+CommonController:负责公用模块的内容;
+GalleryController:用于相册模块的内容;
+IndexController:用于大前台，面向用户的内容;
+LoginController：负责登录,注册,验证等基础信息模块的内容;
+UserCenterController：
 
 
 

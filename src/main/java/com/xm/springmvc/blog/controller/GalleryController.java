@@ -16,7 +16,7 @@ import com.xm.springmvc.common.utils.ModelAndViewUtil;
  */
 
 @Controller
-@RequestMapping("/gallery")
+@RequestMapping("/user/gallery")
 public class GalleryController {
 
 	//日志文件
