@@ -44,6 +44,6 @@
 	</select>
 	
 	<select id="getAllUser" parameterType="java.lang.String" resultType="User">
-	  select *  from  user where userName=#{name}#
+	  select  userName  from  user where userName=#{name}#
 	</select>
 </mapper>

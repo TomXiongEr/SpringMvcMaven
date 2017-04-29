@@ -11,13 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.xm.springmvc.blog.dao.IUserDao;
 import com.xm.springmvc.blog.domain.Permission;
 import com.xm.springmvc.blog.domain.Role;
 import com.xm.springmvc.blog.domain.User;
 import com.xm.springmvc.blog.service.UserService;
-import com.xm.springmvc.common.cache.RedisClient;
+import com.xm.springmvc.common.exception.ServiceException;
 import com.xm.springmvc.common.model.SysConstant;
 
 /**
@@ -35,21 +34,21 @@ public class UserServiceImpl implements UserService {
 	    private IUserDao userDao;
 	   
 		@Override
-		public String getUserNameById(String userId){
+		public String getUserNameById(String userId) throws ServiceException{
 			String str=""; 
 			try{
 			    str=this.userDao.getUserNameById(userId);
+				return str;
 			}catch(Exception e){
-				e.printStackTrace();
+				throw new ServiceException("通过id获取用户名出错!",e);
 			}
-			return str;
 		}
 		
 		@Override
 		@SuppressWarnings("rawtypes")
-		public Map loginCheck(User user,HttpServletRequest request) throws Exception{
-			Map<String,String> resultMap=new HashMap<String,String>();
+		public Map loginCheck(User user,HttpServletRequest request) throws ServiceException{
 			try{
+				Map<String,String> resultMap=new HashMap<String,String>();
 				if(verifyCode(request)){
 					User object=this.userDao.getUserByName(user);
 					if(object==null){
@@ -57,12 +56,11 @@ public class UserServiceImpl implements UserService {
 					}
 				}else{
 					resultMap.put("checkCode",SysConstant.VERIFY_CODE_ERROR);
-				}			
+				}		
+				return resultMap;
 			}catch(Exception e){
-				e.printStackTrace();
-				throw new Exception("登陆验证失败!");
+				throw new ServiceException("登陆验证失败!",e);
 			}
-			return resultMap;
 		}
 		
 		public boolean verifyCode(HttpServletRequest request){
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService {
 		
 		@Override
 		@SuppressWarnings({ "unused", "rawtypes" })
-		public Map register(User user,HttpServletRequest request)  throws Exception{
+		public Map register(User user,HttpServletRequest request)  throws ServiceException{
 			Map<String,String> resultMap=new HashMap<String,String>();
 			String rePassword=request.getParameter("rePassword");
 			try{  
@@ -90,12 +88,12 @@ public class UserServiceImpl implements UserService {
 					resultMap.put("result","false");
 					resultMap.put("msg","该账号已经注册");
 				}
+				return resultMap;
 			}catch(Exception e){
 				resultMap.put("result","false");
 				resultMap.put("msg","注册失败");
-				throw new Exception("注册失败！");
+				throw new ServiceException("注册失败！",e);
 			}
-			return resultMap;
 		}
 		
 		//for test
@@ -105,47 +103,48 @@ public class UserServiceImpl implements UserService {
 			List<User> list=null;
 			Map map=new HashMap();
 			String name="admin";
-			if(RedisClient.get("list")!=null){
+			/*if(RedisClient.get("list")!=null){
 				list=(List<User>)JSON.parse(RedisClient.get("list").toString());
 				System.err.print("list:"+RedisClient.get("list"));
 			}else{
 				list=this.userDao.getAllUser(name);
 				RedisClient.set("list",list);
 				System.err.print("调用查询!");
-			}			
+			}	*/		
+			list=this.userDao.getAllUser(name);
 			return list;
 		}
 
 		
 		@Override
-		public User getUserByUserName(String userName) throws Exception{
+		public User getUserByUserName(String userName) throws ServiceException{
 			User user=null;
 			try{
 				user=this.userDao.getUserByUserName(userName); 
 			}catch(Exception e){
-				throw new Exception("通过用户名获取用户出错!");
+				throw new ServiceException("通过用户名获取用户出错!",e);
 			}
 			return user;
 		}
 
 		@Override
-		public List<Role> getRolesByUserName(String userName) throws Exception{
+		public List<Role> getRolesByUserName(String userName) throws ServiceException{
 			List<Role> roleList=new ArrayList<Role>();
 			try{
 				roleList=this.userDao.getRolesByUserName(userName); 
 			}catch(Exception e){
-				throw new Exception("通过用户名获取用户出错!");
+				throw new ServiceException("通过用户名获取用户出错!",e);
 			}
 			return roleList;
 		}
 
 		@Override
-		public List<Permission> getPermissionsByUserName(String userName) throws Exception{
+		public List<Permission> getPermissionsByUserName(String userName) throws ServiceException{
 			List<Permission> permissionList=new ArrayList<Permission>();
 			try{
 				permissionList=this.userDao.getPermissionsByUserName(userName);
 			}catch(Exception e){
-				throw new Exception("通过用户名获取该用户的角色权限出错!"); 
+				throw new ServiceException("通过用户名获取该用户的角色权限出错!",e); 
 			}
 			return permissionList;
 		}

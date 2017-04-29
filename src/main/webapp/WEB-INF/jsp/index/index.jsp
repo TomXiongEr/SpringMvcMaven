@@ -28,12 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   text-decoration: none;
   text-transform: capitalize;
 }
-
-
-.fa-tag{
-
-}
-
 </style>
 <body class="top-navigation">
     <div id="wrapper">
@@ -89,8 +83,124 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </nav>
         </div>
         <div class="wrapper wrapper-content">
-            <div class="container">
+            <div class="container"> 
 	             <div class="row">
+	                    <div class="col-lg-8">
+	                        <div class="ibox float-e-margins">
+	                            <div class="ibox-content" style="margin-bottom:5px;height:500px;">
+	                                <div>
+	                                        <span class="pull-right text-right">
+	                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
+	                                            <br/>
+	                                            All sales: 162,862
+	                                        </span>
+	                                    <h3 class="font-bold no-margins">
+	                                        Half-year revenue margin
+	                                    </h3>
+	                                    <small>Sales marketing.</small>
+	                                </div>
+	
+	                                <div class="m-t-sm">
+	
+	                                    <div class="row">
+	                                        <div class="col-md-8">
+	                                            <div>
+	                                            <canvas id="lineChart" height="114"></canvas>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-md-4">
+	                                            <ul class="stat-list m-t-lg">
+	                                                <li>
+	                                                    <h2 class="no-margins">2,346</h2>
+	                                                    <small>Total orders in period</small>
+	                                                    <div class="progress progress-mini">
+	                                                        <div class="progress-bar" style="width: 48%;"></div>
+	                                                    </div>
+	                                                </li>
+	                                                <li>
+	                                                    <h2 class="no-margins ">4,422</h2>
+	                                                    <small>Orders in last month</small>
+	                                                    <div class="progress progress-mini">
+	                                                        <div class="progress-bar" style="width: 60%;"></div>
+	                                                    </div>
+	                                                </li>
+	                                            </ul>
+	                                        </div>
+	                                    </div>
+	
+	                                </div>
+	
+	                                <div class="m-t-md">
+	                                    <small class="pull-right">
+	                                        <i class="fa fa-clock-o"> </i>
+	                                        Update on 16.07.2015
+	                                    </small>
+	                                    <small>
+	                                        <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
+	                                    </small>
+	                                </div>
+	
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-4">
+	                        <div class="ibox float-e-margins">   
+	                           <div class="contact-box center-version">
+				                    <a href="profile.html">
+				                        <img alt="image" class="img-circle" src="./style/blog/img/a2.jpg">
+				                        <h3 class="m-b-xs"><strong>John Smith</strong></h3>
+				                        <div class="font-bold">Graphics designer</div>
+				                        <!-- <address class="m-t-md">
+				                            <strong>Twitter, Inc.</strong><br>
+				                            795 Folsom Ave, Suite 600<br>
+				                            San Francisco, CA 94107<br>
+				                            <abbr title="Phone">P:</abbr> (123) 456-7890
+				                            <ul class="tag-list-ul" >
+					                        <li><a href="project_detail.html"><i class="fa fa-tag"></i> Zender</a></li>
+					                        <li><a href="project_detail.html"><i class="fa fa-tag"></i> Lorem ipsum</a></li>
+					                        <li><a href="project_detail.html"><i class="fa fa-tag"></i> Passages</a></li>
+					                        <li><a href="project_detail.html"><i class="fa fa-tag"></i> Variations</a></li>
+					                        </ul>
+				                        </address> -->
+				                         <div class="ibox float-e-margins">
+					                        <div class="ibox-content">
+					                            <div class="file-manager">
+					                                <h5>Show:</h5>
+					                                <a href="file_manager.html#" class="file-control active">Ale</a>
+					                                <a href="file_manager.html#" class="file-control">Documents</a>
+					                                <a href="file_manager.html#" class="file-control">Audio</a>
+					                                <a href="file_manager.html#" class="file-control">Images</a>
+					                                <!-- <button class="btn btn-primary btn-block">Upload Files</button> -->
+					                                <div class="hr-line-dashed"></div>
+					                                <h5 class="tag-title">Tags</h5>
+					                                <ul class="tag-list" style="padding: 0">
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Family</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Work</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Home</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Children</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Holidays</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Music</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Photography</a></li>
+					                                    <li><a href="file_manager.html"><i class="fa fa-tag"></i> Film</a></li>
+					                                </ul>
+					                                <div class="clearfix"></div>
+					                            </div>
+					                        </div>
+					                        </div>
+				                    </a>
+				                    <div class="contact-box-footer">
+				                        <div class="m-t-xs btn-group">
+				                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+				                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+				                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+				                        </div>
+				                    </div>
+				                </div>              
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <div class="row">
 	                <div class="col-md-2">
 	                    <div class="ibox float-e-margins">
 	                        <div class="ibox-title">
@@ -156,93 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    </div>
 	                </div>
 	            </div>
-	             <div class="row">
-	                    <div class="col-lg-8">
-	                        <div class="ibox float-e-margins">
-	                            <div class="ibox-content">
-	                                <div>
-	                                        <span class="pull-right text-right">
-	                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-	                                            <br/>
-	                                            All sales: 162,862
-	                                        </span>
-	                                    <h3 class="font-bold no-margins">
-	                                        Half-year revenue margin
-	                                    </h3>
-	                                    <small>Sales marketing.</small>
-	                                </div>
-	
-	                                <div class="m-t-sm">
-	
-	                                    <div class="row">
-	                                        <div class="col-md-8">
-	                                            <div>
-	                                            <canvas id="lineChart" height="114"></canvas>
-	                                            </div>
-	                                        </div>
-	                                        <div class="col-md-4">
-	                                            <ul class="stat-list m-t-lg">
-	                                                <li>
-	                                                    <h2 class="no-margins">2,346</h2>
-	                                                    <small>Total orders in period</small>
-	                                                    <div class="progress progress-mini">
-	                                                        <div class="progress-bar" style="width: 48%;"></div>
-	                                                    </div>
-	                                                </li>
-	                                                <li>
-	                                                    <h2 class="no-margins ">4,422</h2>
-	                                                    <small>Orders in last month</small>
-	                                                    <div class="progress progress-mini">
-	                                                        <div class="progress-bar" style="width: 60%;"></div>
-	                                                    </div>
-	                                                </li>
-	                                            </ul>
-	                                        </div>
-	                                    </div>
-	
-	                                </div>
-	
-	                                <div class="m-t-md">
-	                                    <small class="pull-right">
-	                                        <i class="fa fa-clock-o"> </i>
-	                                        Update on 16.07.2015
-	                                    </small>
-	                                    <small>
-	                                        <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-	                                    </small>
-	                                </div>
-	
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="col-lg-4">
-	                        <div class="ibox float-e-margins">   
-	                           <div class="contact-box center-version">
-				                    <a href="profile.html">
-				                        <img alt="image" class="img-circle" src="./style/blog/img/a2.jpg">
-				                        <h3 class="m-b-xs"><strong>John Smith</strong></h3>
-				                        <div class="font-bold">Graphics designer</div>
-				                        <address class="m-t-md">
-				                            <strong>Twitter, Inc.</strong><br>
-				                            795 Folsom Ave, Suite 600<br>
-				                            San Francisco, CA 94107<br>
-				                            <abbr title="Phone">P:</abbr> (123) 456-7890
-				                        </address>
-				                        <li><a class="fa-tag"><i class="fa fa-tag"></i> Zender</a></li>
-				                        <li><a class="fa-tag" href="project_detail.html"><i class="fa fa-tag"></i> Passages</a></li>
-				                    </a>
-			                   
-				                    <div class="contact-box-footer">
-				                        <div class="m-t-xs btn-group">
-				                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
-				                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
-				                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
-				                        </div>
-				                    </div>
-				                </div>              
-	                        </div>
-	                    </div>
-	                </div>
+	                
 	             <div class="row">     
 	              <!--将博客内容列表迁移到此处-->
 	              <div class="col-lg-12">

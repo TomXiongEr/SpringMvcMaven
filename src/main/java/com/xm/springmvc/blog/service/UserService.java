@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import com.xm.springmvc.blog.domain.Permission;
 import com.xm.springmvc.blog.domain.Role;
 import com.xm.springmvc.blog.domain.User;
+import com.xm.springmvc.common.exception.ServiceException;
 
 public interface UserService {
 
-	public String getUserNameById(String userId);
+	public String getUserNameById(String userId) throws ServiceException;
 	
-	public Map loginCheck(User user,HttpServletRequest request) throws Exception;
+	public Map loginCheck(User user,HttpServletRequest request) throws ServiceException;
 	
-	public Map register(User user,HttpServletRequest request) throws Exception;
+	public Map register(User user,HttpServletRequest request) throws ServiceException;
 	
 	public List<User> getAllUser() throws Exception;
 	
@@ -27,7 +28,7 @@ public interface UserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public User getUserByUserName(String userName) throws Exception;
+	public User getUserByUserName(String userName) throws ServiceException;
 	
 	/**
 	 * 根据用户名获取该用户的所有角色
@@ -37,7 +38,7 @@ public interface UserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Role> getRolesByUserName(String userName) throws Exception;
+	public List<Role> getRolesByUserName(String userName) throws ServiceException;
 	
 	/**
 	 * 获取用户权限
@@ -47,5 +48,5 @@ public interface UserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Permission> getPermissionsByUserName(String userName) throws Exception;
+	public List<Permission> getPermissionsByUserName(String userName) throws ServiceException;
 }

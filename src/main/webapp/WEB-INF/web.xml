@@ -3,7 +3,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>SpringMvcMaven</display-name>
-
 	<!-- Spring配置文件开始 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

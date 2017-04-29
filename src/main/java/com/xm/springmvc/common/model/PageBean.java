@@ -25,6 +25,8 @@ public class PageBean<T> implements Serializable {
             this.size = page.size();
         }
     }
+    
+    
     public long getTotal() {
         return total;
     }

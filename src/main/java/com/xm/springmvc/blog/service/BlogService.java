@@ -3,6 +3,7 @@ package com.xm.springmvc.blog.service;
 import java.util.Map;
 
 import com.xm.springmvc.blog.domain.Blog;
+import com.xm.springmvc.common.exception.ServiceException;
 import com.xm.springmvc.common.model.PageBean;
 import com.xm.springmvc.common.model.PageModel;
 
@@ -16,7 +17,7 @@ public interface BlogService {
 	 *@Params:
 	 *@Return List<Map>
 	 */
-	public PageBean<Map> getBlogList(PageModel pageModel);
+	public PageBean<Map> getBlogList(PageModel pageModel) throws ServiceException;
 
 	
 	/**
@@ -24,8 +25,9 @@ public interface BlogService {
 	 * @author TOM XIONG
 	 * @date 2017年3月18日 下午9:23:16
 	 * @param blog
+	 * @throws ServiceException 
 	 */
-	public void saveBlogData(Blog blog);
+	public void saveBlogData(Blog blog) throws ServiceException;
 	
 	
 	/**
@@ -33,7 +35,8 @@ public interface BlogService {
 	 * @author TOM XIONG
 	 * @date 2017年3月19日 下午3:27:47
 	 * @return
+	 * @throws ServiceException 
 	 */
-	public Blog getBlogById(int id);
+	public Blog getBlogById(int id) throws ServiceException;
 
 }

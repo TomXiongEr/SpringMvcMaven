@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xm.springmvc.blog.domain.Blog;
 import com.xm.springmvc.blog.service.BlogService;
 import com.xm.springmvc.blog.service.UserService;
+import com.xm.springmvc.common.exception.ServiceException;
 import com.xm.springmvc.common.model.PageBean;
 import com.xm.springmvc.common.model.PageModel;
 import com.xm.springmvc.common.utils.ModelAndViewUtil;
@@ -68,8 +69,12 @@ public class BlogController {
 	@RequestMapping("/articleDetail")
 	public ModelAndView  articleDetail(Blog blog){
 		ModelAndView view=ModelAndViewUtil.getModelAndViewUtil("/myBlog/blogArticle");
-		blog=this.blogService.getBlogById(blog.getId());
-		view.addObject("blog",blog);
+		try {
+			blog=this.blogService.getBlogById(blog.getId());
+			view.addObject("blog",blog);
+		} catch (ServiceException e) {
+			logger.error("进入已发表博客页失败",e);
+		}
 		return view;
 	}
 	
@@ -81,8 +86,8 @@ public class BlogController {
 	 * @return
 	 */
 	@RequestMapping("/toEditBlogPage")
-	public ModelAndView toEditBlogPage(){
-		return ModelAndViewUtil.getModelAndViewUtil("/myBlog/editBlogPage");
+	public String toEditBlogPage(){
+		return "/myBlog/editBlogPage";
 	}
 	
 	/**
@@ -96,7 +101,7 @@ public class BlogController {
 		try{
 			this.blogService.saveBlogData(blog);
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error("保存编辑的博客内容出错",e);
 		}
 		return "redirect:/user/blog/toEditBlogPage";
 	}

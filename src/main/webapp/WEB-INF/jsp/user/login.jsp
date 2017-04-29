@@ -14,8 +14,9 @@
 	<script src="${root}/style/js/modernizr.custom.63321.js"></script>
 	<script src="${root}/style/js/jquery-1.6.4.min.js"></script>
 	<script src="${root}/style/js/layer.js"></script>
-	<link rel="stylesheet" type="text/css" href="${root}/style/css/style.css" />
+	
 	<link rel="stylesheet" type="text/css" href="${root}/style/css/layer.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/style/css/style.css" />
   </head>
   <body>
         <div class="container">	

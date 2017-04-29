@@ -2,7 +2,7 @@ package com.xm.springmvc.common.exception;
 
 public class CustomException extends Exception{
 
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
    public CustomException() {
 	   super();

@@ -1,3 +1,10 @@
 Manifest-Version: 1.0
-Class-Path: 
-
+Boot-Class-Path: hotcode2.jar
+Built-By: zhuyong
+Build-Jdk: 1.7.0_71
+Premain-Class: com.taobao.hotcode2.AgentMain
+Created-By: http://hotcode.alibaba-inc.com
+Can-Redefine-Classes: true
+Main-Class: com.taobao.hotcode2.RemoteMain
+HotCode2-Version: 2.0.1.20150731-1533
+Archiver-Version: Plexus Archiver
