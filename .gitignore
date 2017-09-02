@@ -2,6 +2,7 @@
 target/
 *.ser
 *.ec
+*.class
 # IntelliJ Idea
 .idea/
 out/
