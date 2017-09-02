@@ -2,16 +2,12 @@
 target/
 *.ser
 *.ec
-*.class
-
 # IntelliJ Idea
 .idea/
 out/
 *.ipr
 *.iws
 *.iml
-
-
 # Eclipse
 .classpath
 .project
